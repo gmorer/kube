@@ -1,0 +1,23 @@
+
+# netdata.localhost {
+#  proxy / netdata:19999
+#  tls admin@example.org
+#}
+
+
+localhost {
+	tls /etc/caddy/cert.pem /etc/caddy/key.pem
+	encode zstd gzip
+	file_server
+	root * /var/www/
+}
+
+p2pchat.localhost {
+	tls /etc/caddy/cert.pem /etc/caddy/key.pem
+	reverse_proxy p2p_chat:8088
+}
+
+redtetris.localhost {
+	tls /etc/caddy/cert.pem /etc/caddy/key.pem
+	reverse_proxy red_tetris:8080
+}
