@@ -1,6 +1,6 @@
 [submodule "p2p_chat"]
 	path = p2p_chat
-	url = https://github.com/gmorer/p2p_chat
+	url = git@github.com:gmorer/p2p_chat.git
 [submodule "red_tetris"]
 	path = red_tetris
-	url = https://github.com/gmorer/red_tetris
+	url = git@github.com:gmorer/red_tetris.git
