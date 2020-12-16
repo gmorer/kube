@@ -6,46 +6,35 @@ services:
   caddy:
     image: caddy:2-alpine
     ports:
-      - 8080:80
-      - 8443:443
+      - 80:80
+      - 443:443
     volumes:
       - ./caddy:/etc/caddy/
       - ./static:/var/www
-      # - caddy:/root/.caddy
-    # networks:
-      # - internal
     depends_on:
       - "p2p_chat"
       - "red_tetris"
+      - "netdata"
     environment:
       # ACME_AGREE: 'true'
 
-  # netdata:
-  #   restart: always
-  #   # hostname: netdata.localhost
-  #   image: netdata/netdata
-  #   cap_add:
-  #     - SYS_PTRACE
-  #   security_opt:
-  #     - apparmor:unconfined
-  #   # networks:
-  #     # - internal
-  #   volumes:
-  #     - /proc:/host/proc:ro
-  #     - /sys:/host/sys:ro
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  netdata:
+    restart: always
+    # hostname: netdata.localhost
+    image: netdata/netdata
+    cap_add:
+      - SYS_PTRACE
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
 
   # p2p_chat port: 8088
   p2p_chat:
     build: ./p2p_chat
-    # network:
-      # internal
 
   # red tetris port: 8080
   red_tetris:
     build: ./red_tetris
-    # network:
-      # internal
 
 # networks:
   # internal

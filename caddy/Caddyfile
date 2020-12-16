@@ -1,23 +1,27 @@
-
-# netdata.localhost {
-#  proxy / netdata:19999
-#  tls admin@example.org
-#}
-
-
-localhost {
+guilhem.xyz {
 	tls /etc/caddy/cert.pem /etc/caddy/key.pem
 	encode zstd gzip
+	templates
 	file_server
 	root * /var/www/
 }
 
-p2pchat.localhost {
+p2pchat.guilhem.xyz {
 	tls /etc/caddy/cert.pem /etc/caddy/key.pem
 	reverse_proxy p2p_chat:8088
 }
 
-redtetris.localhost {
+redtetris.guilhem.xyz {
 	tls /etc/caddy/cert.pem /etc/caddy/key.pem
 	reverse_proxy red_tetris:8080
+}
+
+data.guilhem.xyz {
+	tls /etc/caddy/cert.pem /etc/caddy/key.pem
+	reverse_proxy netdata:19999
+}
+
+www.guilhem.xyz guilhem.sexy www.guilhem.sexy {
+	tls /etc/caddy/cert.pem /etc/caddy/key.pem
+	redir https://guilhem.xyz{uri}
 }

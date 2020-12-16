@@ -1,0 +1,14 @@
+[Unit]
+Description=Start the kube pod
+After=network-online.target
+
+[Service]
+User=teto
+Restart=always
+ExecStart=/usr/bin/podman pod start kube
+ExecStop=/usr/bin/podman pod stop kube
+RestartSec=10
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
